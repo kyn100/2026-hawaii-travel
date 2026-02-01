@@ -30,7 +30,7 @@ export function usePlaces() {
         description: islandsI18n.oahu[language].description,
         heroImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Waikiki_Beach%2C_Honolulu.JPG/1280px-Waikiki_Beach%2C_Honolulu.JPG',
         center: { lat: 21.4389, lng: -158.0001 },
-        placeCount: 5,
+        placeCount: 6,
       },
       {
         id: 'big-island',

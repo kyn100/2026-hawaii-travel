@@ -69,7 +69,7 @@ export default function Home() {
               <div className="text-gray-600 mt-1">{t('home.stats.islands')}</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-teal-600">15</div>
+              <div className="text-4xl font-bold text-teal-600">16</div>
               <div className="text-gray-600 mt-1">{t('home.stats.places')}</div>
             </div>
             <div>

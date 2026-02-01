@@ -614,6 +614,44 @@ export const placesI18n: Record<string, PlaceI18n> = {
       ],
     },
   },
+  'kualoa-ranch': {
+    en: {
+      name: 'Kualoa Ranch',
+      address: '49-560 Kamehameha Hwy, Kaneohe, HI 96744',
+      shortDescription: 'Famous movie location with ATV tours, horseback riding, and stunning valleys.',
+      whyPopular: "This 4,000-acre private nature reserve is Hollywood's favorite Hawaii filming location. Featured in Jurassic Park, Lost, and 50+ productions. Offers ziplines, ATV tours, horseback riding, and Hawaiian cultural experiences.",
+      history: "Kualoa (meaning 'long back') was one of the most sacred places on Oahu. Ancient Hawaiian royalty brought their children here for training. The Judd family has owned the ranch since 1850, preserving it as a working cattle ranch and nature reserve.",
+      facts: [
+        'Featured in Jurassic Park, Jurassic World, Lost, and 50 First Dates',
+        'The valley served as a Hawaiian royal sanctuary for centuries',
+        "Ka'a'awa Valley is nicknamed 'Jurassic Valley'",
+        'The ranch spans 4,000 acres from mountain to sea',
+      ],
+      restaurants: [
+        { name: "Aunty Pat's Café", cuisine: 'Hawaiian/American', priceRange: '$', rating: 4.3, description: "On-site café at Kualoa Ranch.", address: '49-560 Kamehameha Hwy', mustTry: 'Kalua Pork Plate' },
+        { name: "Haleiwa Joe's Haiku Gardens", cuisine: 'Seafood/American', priceRange: '$$', rating: 4.4, description: 'Scenic restaurant near Kualoa.', address: '46-336 Haiku Rd, Kaneohe', mustTry: 'Coconut Shrimp' },
+        { name: "Mike's Huli Chicken", cuisine: 'Hawaiian BBQ', priceRange: '$', rating: 4.6, description: 'Legendary roadside chicken.', address: 'Kamehameha Hwy, Kahuku', mustTry: 'Huli Huli Chicken' },
+      ],
+    },
+    zh: {
+      name: '古兰尼牧场',
+      address: '49-560 Kamehameha Hwy, Kaneohe, HI 96744',
+      shortDescription: '著名的电影拍摄地，提供ATV、骑马和壮丽山谷体验。',
+      whyPopular: '这片4000英亩的私人自然保护区是好莱坞最喜欢的夏威夷拍摄地。《侏罗纪公园》、《迷失》等50多部作品在此取景。提供滑索、ATV、骑马和夏威夷文化体验。',
+      history: '古兰尼（意为"长背"）是欧胡岛最神圣的地方之一。古代夏威夷皇室将孩子带到这里接受训练。贾德家族自1850年以来一直拥有这片牧场，将其保留为经营中的牧场和自然保护区。',
+      facts: [
+        '《侏罗纪公园》、《侏罗纪世界》、《迷失》和《初恋50次》的取景地',
+        '山谷几个世纪以来一直是夏威夷皇室圣地',
+        "卡阿阿瓦山谷被昵称为'侏罗纪山谷'",
+        '牧场占地4000英亩，从山到海',
+      ],
+      restaurants: [
+        { name: "帕特阿姨咖啡馆", cuisine: '夏威夷/美式', priceRange: '$', rating: 4.3, description: '古兰尼牧场内的咖啡馆。', address: '49-560 Kamehameha Hwy', mustTry: '卡鲁阿猪肉套餐' },
+        { name: "哈雷瓦乔海库花园餐厅", cuisine: '海鲜/美式', priceRange: '$$', rating: 4.4, description: '古兰尼附近的风景餐厅。', address: '46-336 Haiku Rd, Kaneohe', mustTry: '椰子虾' },
+        { name: "麦克烤鸡", cuisine: '夏威夷BBQ', priceRange: '$', rating: 4.6, description: '传奇的路边烤鸡。', address: 'Kamehameha Hwy, Kahuku', mustTry: '夏威夷烤鸡' },
+      ],
+    },
+  },
 };
 
 // Base place data (language-independent)
@@ -819,5 +857,18 @@ export const placesBase: Record<string, {
       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Lahaina_Sunset.jpg/1280px-Lahaina_Sunset.jpg',
     ],
     wikipediaSlug: 'Lahaina,_Hawaii',
+  },
+  'kualoa-ranch': {
+    id: 'kualoa-ranch',
+    island: 'oahu',
+    location: { lat: 21.5212, lng: -157.8375 },
+    category: 'adventure',
+    images: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Kualoa_Ranch_Oahu.jpg/1280px-Kualoa_Ranch_Oahu.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Kaaawa_Valley_Kualoa.jpg/1280px-Kaaawa_Valley_Kualoa.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Mokolii_Island_Oahu.jpg/1280px-Mokolii_Island_Oahu.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Kualoa_Regional_Park.jpg/1280px-Kualoa_Regional_Park.jpg',
+    ],
+    wikipediaSlug: 'Kualoa_Ranch',
   },
 };
