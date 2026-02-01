@@ -1,9 +1,9 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState } from 'react';
-import { getPlaceById, getIslandById } from '../data/places';
 import { PhotoGallery } from '../components/Gallery';
 import { PlaceMap } from '../components/Map';
-import { useWikipedia } from '../hooks';
+import { useWikipedia, usePlaces } from '../hooks';
+import { useLanguage } from '../context/LanguageContext';
 import type { Restaurant } from '../types';
 
 type Tab = 'overview' | 'history' | 'facts';
@@ -26,7 +26,7 @@ const categoryIcons: Record<string, string> = {
   adventure: '🚗',
 };
 
-function RestaurantCard({ restaurant }: { restaurant: Restaurant }) {
+function RestaurantCard({ restaurant, mustTryLabel }: { restaurant: Restaurant; mustTryLabel: string }) {
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow">
       <div className="flex justify-between items-start mb-2">
@@ -46,7 +46,7 @@ function RestaurantCard({ restaurant }: { restaurant: Restaurant }) {
       </div>
       {restaurant.mustTry && (
         <div className="text-xs">
-          <span className="text-gray-500">Must try: </span>
+          <span className="text-gray-500">{mustTryLabel}: </span>
           <span className="font-medium text-teal-700">{restaurant.mustTry}</span>
         </div>
       )}
@@ -57,6 +57,8 @@ function RestaurantCard({ restaurant }: { restaurant: Restaurant }) {
 export default function Place() {
   const { placeId } = useParams<{ placeId: string }>();
   const [activeTab, setActiveTab] = useState<Tab>('overview');
+  const { t } = useLanguage();
+  const { getPlaceById, getIslandById } = usePlaces();
 
   const place = getPlaceById(placeId || '');
   const island = place ? getIslandById(place.island) : null;
@@ -65,18 +67,18 @@ export default function Place() {
   if (!place || !island) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-16 text-center">
-        <h1 className="text-2xl font-bold text-gray-800 mb-4">Place not found</h1>
+        <h1 className="text-2xl font-bold text-gray-800 mb-4">{t('place.not.found')}</h1>
         <Link to="/" className="text-teal-600 hover:text-teal-700">
-          ← Back to Home
+          ← {t('place.back.home')}
         </Link>
       </div>
     );
   }
 
-  const tabs: { id: Tab; label: string }[] = [
-    { id: 'overview', label: 'Overview' },
-    { id: 'history', label: 'History' },
-    { id: 'facts', label: 'Facts' },
+  const tabs: { id: Tab; labelKey: string }[] = [
+    { id: 'overview', labelKey: 'place.tab.overview' },
+    { id: 'history', labelKey: 'place.tab.history' },
+    { id: 'facts', labelKey: 'place.tab.facts' },
   ];
 
   return (
@@ -86,7 +88,7 @@ export default function Place() {
         <div className="max-w-7xl mx-auto px-4 py-3">
           <div className="flex items-center gap-2 text-sm text-gray-600">
             <Link to="/" className="hover:text-teal-600">
-              Home
+              {t('place.home')}
             </Link>
             <span>/</span>
             <Link to={`/island/${island.id}`} className="hover:text-teal-600">
@@ -105,7 +107,7 @@ export default function Place() {
             <span
               className={`px-3 py-1 rounded-full text-sm font-medium ${categoryColors[place.category]}`}
             >
-              {categoryIcons[place.category]} {place.category}
+              {categoryIcons[place.category]} {t(`category.${place.category}`)}
             </span>
             <span className="text-gray-400">•</span>
             <span className="text-gray-600">{island.name}</span>
@@ -123,7 +125,7 @@ export default function Place() {
             {/* Why Popular */}
             <div className="bg-gradient-to-r from-teal-50 to-blue-50 rounded-xl p-6 border border-teal-100">
               <h2 className="text-lg font-bold text-teal-800 mb-3 flex items-center gap-2">
-                ⭐ Why It's Popular
+                ⭐ {t('place.why.popular')}
               </h2>
               <p className="text-gray-700 leading-relaxed">{place.whyPopular}</p>
             </div>
@@ -141,7 +143,7 @@ export default function Place() {
                         : 'text-gray-500 hover:text-gray-700'
                     }`}
                   >
-                    {tab.label}
+                    {t(tab.labelKey)}
                   </button>
                 ))}
               </div>
@@ -152,7 +154,7 @@ export default function Place() {
                     <p className="text-gray-700 leading-relaxed">{place.whyPopular}</p>
                     {wikiData && (
                       <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-                        <h3 className="font-semibold text-gray-800 mb-2">From Wikipedia</h3>
+                        <h3 className="font-semibold text-gray-800 mb-2">{t('place.wikipedia')}</h3>
                         <p className="text-gray-600 text-sm leading-relaxed">{wikiData.extract}</p>
                       </div>
                     )}
@@ -184,11 +186,11 @@ export default function Place() {
             {place.restaurants && place.restaurants.length > 0 && (
               <div>
                 <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                  🍽️ Nearby Restaurants
+                  🍽️ {t('place.restaurants')}
                 </h2>
                 <div className="grid sm:grid-cols-2 gap-4">
                   {place.restaurants.map((restaurant, index) => (
-                    <RestaurantCard key={index} restaurant={restaurant} />
+                    <RestaurantCard key={index} restaurant={restaurant} mustTryLabel={t('place.must.try')} />
                   ))}
                 </div>
               </div>
@@ -200,7 +202,7 @@ export default function Place() {
             {/* Map */}
             <div className="bg-white rounded-xl shadow-md overflow-hidden">
               <div className="p-4 border-b">
-                <h3 className="font-bold text-gray-800">📍 Location</h3>
+                <h3 className="font-bold text-gray-800">📍 {t('place.location')}</h3>
               </div>
               <PlaceMap
                 center={place.location}
@@ -216,7 +218,7 @@ export default function Place() {
                   rel="noopener noreferrer"
                   className="mt-2 inline-flex items-center gap-1 text-sm text-teal-600 hover:text-teal-700"
                 >
-                  Open in Google Maps
+                  {t('place.open.maps')}
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"
@@ -231,22 +233,22 @@ export default function Place() {
 
             {/* Quick Facts */}
             <div className="bg-white rounded-xl shadow-md p-6">
-              <h3 className="font-bold text-gray-800 mb-4">Quick Info</h3>
+              <h3 className="font-bold text-gray-800 mb-4">{t('place.quick.info')}</h3>
               <dl className="space-y-3 text-sm">
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">Island</dt>
+                  <dt className="text-gray-500">{t('place.island')}</dt>
                   <dd className="font-medium text-gray-900">{island.name}</dd>
                 </div>
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">Category</dt>
-                  <dd className="font-medium text-gray-900 capitalize">{place.category}</dd>
+                  <dt className="text-gray-500">{t('place.category')}</dt>
+                  <dd className="font-medium text-gray-900">{t(`category.${place.category}`)}</dd>
                 </div>
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">Restaurants</dt>
-                  <dd className="font-medium text-gray-900">{place.restaurants?.length || 0} nearby</dd>
+                  <dt className="text-gray-500">{t('place.restaurants')}</dt>
+                  <dd className="font-medium text-gray-900">{place.restaurants?.length || 0} {t('place.restaurants.count')}</dd>
                 </div>
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">Coordinates</dt>
+                  <dt className="text-gray-500">{t('place.coordinates')}</dt>
                   <dd className="font-medium text-gray-900 text-xs">
                     {place.location.lat.toFixed(4)}, {place.location.lng.toFixed(4)}
                   </dd>
@@ -259,7 +261,7 @@ export default function Place() {
               to={`/island/${island.id}`}
               className="block text-center py-3 px-4 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 font-medium transition-colors"
             >
-              ← More places on {island.name}
+              ← {t('place.more.places')} {island.name}
             </Link>
           </div>
         </div>

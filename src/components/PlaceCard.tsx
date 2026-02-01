@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { Place } from '../types';
+import { useLanguage } from '../context/LanguageContext';
 
 interface PlaceCardProps {
   place: Place;
@@ -24,6 +25,7 @@ const categoryIcons: Record<string, string> = {
 };
 
 export default function PlaceCard({ place }: PlaceCardProps) {
+  const { t } = useLanguage();
   const imageUrl = place.images?.[0] || `https://placehold.co/600x400/0d9488/ffffff?text=${encodeURIComponent(place.name)}`;
 
   return (
@@ -46,7 +48,7 @@ export default function PlaceCard({ place }: PlaceCardProps) {
             categoryColors[place.category]
           }`}
         >
-          {categoryIcons[place.category]} {place.category}
+          {categoryIcons[place.category]} {t(`category.${place.category}`)}
         </span>
       </div>
 

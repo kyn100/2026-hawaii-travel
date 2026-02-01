@@ -1,24 +1,27 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState } from 'react';
-import { getIslandById, getPlacesByIsland } from '../data/places';
 import PlaceCard from '../components/PlaceCard';
 import { PlaceMap } from '../components/Map';
+import { useLanguage } from '../context/LanguageContext';
+import { usePlaces } from '../hooks';
 
 type Category = 'all' | 'beach' | 'volcano' | 'historic' | 'nature' | 'culture' | 'adventure';
-
-const categories: { id: Category; label: string; icon: string }[] = [
-  { id: 'all', label: 'All Places', icon: '🗺️' },
-  { id: 'beach', label: 'Beaches', icon: '🏖️' },
-  { id: 'volcano', label: 'Volcanoes', icon: '🌋' },
-  { id: 'historic', label: 'Historic', icon: '🏛️' },
-  { id: 'nature', label: 'Nature', icon: '🌿' },
-  { id: 'culture', label: 'Culture', icon: '🎭' },
-  { id: 'adventure', label: 'Adventure', icon: '🚗' },
-];
 
 export default function Island() {
   const { islandId } = useParams<{ islandId: string }>();
   const [selectedCategory, setSelectedCategory] = useState<Category>('all');
+  const { t } = useLanguage();
+  const { getIslandById, getPlacesByIsland } = usePlaces();
+
+  const categories: { id: Category; labelKey: string; icon: string }[] = [
+    { id: 'all', labelKey: 'category.all', icon: '🗺️' },
+    { id: 'beach', labelKey: 'category.beach', icon: '🏖️' },
+    { id: 'volcano', labelKey: 'category.volcano', icon: '🌋' },
+    { id: 'historic', labelKey: 'category.historic', icon: '🏛️' },
+    { id: 'nature', labelKey: 'category.nature', icon: '🌿' },
+    { id: 'culture', labelKey: 'category.culture', icon: '🎭' },
+    { id: 'adventure', labelKey: 'category.adventure', icon: '🚗' },
+  ];
 
   const island = getIslandById(islandId || '');
   const allPlaces = getPlacesByIsland(islandId || '');
@@ -28,7 +31,7 @@ export default function Island() {
       <div className="max-w-7xl mx-auto px-4 py-16 text-center">
         <h1 className="text-2xl font-bold text-gray-800 mb-4">Island not found</h1>
         <Link to="/" className="text-teal-600 hover:text-teal-700">
-          ← Back to Home
+          ← {t('place.back.home')}
         </Link>
       </div>
     );
@@ -59,7 +62,7 @@ export default function Island() {
               to="/"
               className="text-blue-200 hover:text-white text-sm mb-2 inline-flex items-center gap-1"
             >
-              ← All Islands
+              ← {t('island.back')}
             </Link>
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">{island.name}</h1>
             <p className="text-blue-100 max-w-2xl">{island.description}</p>
@@ -70,7 +73,7 @@ export default function Island() {
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Map Section */}
         <section className="mb-8">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">📍 Places on {island.name}</h2>
+          <h2 className="text-xl font-bold text-gray-800 mb-4">📍 {t('island.map.title')} {island.name}</h2>
           <PlaceMap center={island.center} places={allPlaces} className="h-72 rounded-xl shadow-md" />
         </section>
 
@@ -91,7 +94,7 @@ export default function Island() {
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
-                  {cat.icon} {cat.label}
+                  {cat.icon} {t(cat.labelKey)}
                 </button>
               );
             })}
@@ -102,9 +105,9 @@ export default function Island() {
         <section>
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-bold text-gray-800">
-              {selectedCategory === 'all' ? 'All Places' : `${categories.find(c => c.id === selectedCategory)?.label}`}
+              {t(categories.find(c => c.id === selectedCategory)?.labelKey || 'category.all')}
             </h2>
-            <span className="text-gray-500 text-sm">{filteredPlaces.length} places</span>
+            <span className="text-gray-500 text-sm">{filteredPlaces.length} {t('island.places')}</span>
           </div>
 
           {filteredPlaces.length === 0 ? (
