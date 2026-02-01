@@ -52,7 +52,15 @@ export default function PlaceMap({
             <Popup>
               <div className="text-center">
                 <strong className="block text-sm">{place.name}</strong>
-                <span className="text-xs text-gray-500">{place.address}</span>
+                <span className="text-xs text-gray-500 block mb-1">{place.address}</span>
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${place.location.lat},${place.location.lng}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-blue-600 hover:text-blue-800 hover:underline"
+                >
+                  Open in Google Maps →
+                </a>
               </div>
             </Popup>
           </Marker>

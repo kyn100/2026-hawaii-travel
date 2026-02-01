@@ -73,7 +73,20 @@ export default function Island() {
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Map Section */}
         <section className="mb-8">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">📍 {t('island.map.title')} {island.name}</h2>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-bold text-gray-800">📍 {t('island.map.title')} {island.name}</h2>
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${island.name}+Hawaii`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-teal-600 hover:text-teal-700 flex items-center gap-1"
+            >
+              {t('island.view.google.maps')}
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
           <PlaceMap center={island.center} places={allPlaces} className="h-72 rounded-xl shadow-md" />
         </section>
 

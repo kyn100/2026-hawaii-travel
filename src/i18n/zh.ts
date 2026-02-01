@@ -28,6 +28,7 @@ const zh: Record<string, string> = {
   'island.back': '返回所有岛屿',
   'island.places': '处景点',
   'island.map.title': '景点地图',
+  'island.view.google.maps': '在谷歌地图中查看',
 
   // Place page
   'place.home': '首页',

@@ -28,6 +28,7 @@ const en: Record<string, string> = {
   'island.back': 'All Islands',
   'island.places': 'places',
   'island.map.title': 'Places on',
+  'island.view.google.maps': 'View in Google Maps',
 
   // Place page
   'place.home': 'Home',
