@@ -76,6 +76,21 @@ const zh: Record<string, string> = {
   'hotel.address': '地址',
   'hotel.phone': '电话',
   'hotel.directions': '获取路线',
+
+  // Weather
+  'weather.title': '天气预报',
+  'weather.period': '行程日期',
+  'weather.avg.high': '平均高温',
+  'weather.avg.low': '平均低温',
+  'weather.water.temp': '海水温度',
+  'weather.humidity': '湿度',
+  'weather.precipitation': '降雨',
+  'weather.sunny': '晴天',
+  'weather.partly-cloudy': '多云',
+  'weather.cloudy': '阴天',
+  'weather.rainy': '雨天',
+  'weather.showers': '阵雨',
+  'weather.note': '基于二月份历史平均数据',
 };
 
 export default zh;

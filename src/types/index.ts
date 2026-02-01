@@ -22,6 +22,23 @@ export interface Hotel {
   location: Location;
 }
 
+export interface WeatherDay {
+  date: string;
+  high: number;
+  low: number;
+  condition: 'sunny' | 'partly-cloudy' | 'cloudy' | 'rainy' | 'showers';
+  precipitation: number;
+}
+
+export interface Weather {
+  period: string;
+  avgHigh: number;
+  avgLow: number;
+  waterTemp: number;
+  humidity: number;
+  forecast: WeatherDay[];
+}
+
 export interface Place {
   id: string;
   name: string;
@@ -46,6 +63,7 @@ export interface Island {
   center: Location;
   placeCount: number;
   hotel?: Hotel;
+  weather?: Weather;
 }
 
 export interface UnsplashPhoto {

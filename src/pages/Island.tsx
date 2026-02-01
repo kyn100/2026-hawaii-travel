@@ -125,6 +125,67 @@ export default function Island() {
           </section>
         )}
 
+        {/* Weather Section */}
+        {island.weather && (
+          <section className="mb-8">
+            <h2 className="text-xl font-bold text-gray-800 mb-4">🌤️ {t('weather.title')}</h2>
+            <div className="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl p-6 shadow-md border border-orange-100">
+              {/* Weather Summary */}
+              <div className="flex flex-wrap gap-6 mb-6">
+                <div className="text-center">
+                  <p className="text-xs text-gray-500 uppercase">{t('weather.period')}</p>
+                  <p className="text-lg font-semibold text-gray-800">{island.weather.period}</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-xs text-gray-500 uppercase">{t('weather.avg.high')}</p>
+                  <p className="text-lg font-semibold text-orange-600">{island.weather.avgHigh}°C</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-xs text-gray-500 uppercase">{t('weather.avg.low')}</p>
+                  <p className="text-lg font-semibold text-blue-600">{island.weather.avgLow}°C</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-xs text-gray-500 uppercase">{t('weather.water.temp')}</p>
+                  <p className="text-lg font-semibold text-teal-600">🌊 {island.weather.waterTemp}°C</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-xs text-gray-500 uppercase">{t('weather.humidity')}</p>
+                  <p className="text-lg font-semibold text-gray-600">💧 {island.weather.humidity}%</p>
+                </div>
+              </div>
+
+              {/* 10-Day Forecast */}
+              <div className="overflow-x-auto">
+                <div className="flex gap-2 min-w-max pb-2">
+                  {island.weather.forecast.map((day) => {
+                    const weatherIcon = {
+                      'sunny': '☀️',
+                      'partly-cloudy': '⛅',
+                      'cloudy': '☁️',
+                      'rainy': '🌧️',
+                      'showers': '🌦️',
+                    }[day.condition];
+                    return (
+                      <div
+                        key={day.date}
+                        className="flex flex-col items-center bg-white rounded-lg p-3 min-w-[70px] shadow-sm"
+                      >
+                        <span className="text-xs text-gray-500 font-medium">{day.date}</span>
+                        <span className="text-2xl my-1">{weatherIcon}</span>
+                        <span className="text-xs text-orange-600 font-medium">{day.high}°</span>
+                        <span className="text-xs text-blue-600">{day.low}°</span>
+                        <span className="text-xs text-gray-400 mt-1">💧{day.precipitation}%</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <p className="text-xs text-gray-400 mt-4 text-center">{t('weather.note')}</p>
+            </div>
+          </section>
+        )}
+
         {/* Category Filter */}
         <section className="mb-8">
           <div className="flex flex-wrap gap-2">

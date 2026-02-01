@@ -76,6 +76,21 @@ const en: Record<string, string> = {
   'hotel.address': 'Address',
   'hotel.phone': 'Phone',
   'hotel.directions': 'Get Directions',
+
+  // Weather
+  'weather.title': 'Weather Forecast',
+  'weather.period': 'Trip Period',
+  'weather.avg.high': 'Avg High',
+  'weather.avg.low': 'Avg Low',
+  'weather.water.temp': 'Water Temp',
+  'weather.humidity': 'Humidity',
+  'weather.precipitation': 'Rain',
+  'weather.sunny': 'Sunny',
+  'weather.partly-cloudy': 'Partly Cloudy',
+  'weather.cloudy': 'Cloudy',
+  'weather.rainy': 'Rainy',
+  'weather.showers': 'Showers',
+  'weather.note': 'Based on historical averages for February',
 };
 
 export default en;
