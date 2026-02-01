@@ -70,6 +70,12 @@ const zh: Record<string, string> = {
   'lang.select': '语言',
   'lang.zh': '中文',
   'lang.en': 'English',
+
+  // Hotel
+  'hotel.title': '我们的酒店',
+  'hotel.address': '地址',
+  'hotel.phone': '电话',
+  'hotel.directions': '获取路线',
 };
 
 export default zh;

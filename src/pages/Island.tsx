@@ -90,6 +90,41 @@ export default function Island() {
           <PlaceMap center={island.center} places={allPlaces} className="h-72 rounded-xl shadow-md" />
         </section>
 
+        {/* Hotel Section */}
+        {island.hotel && (
+          <section className="mb-8">
+            <h2 className="text-xl font-bold text-gray-800 mb-4">🏨 {t('hotel.title')}</h2>
+            <div className="bg-gradient-to-r from-teal-50 to-blue-50 rounded-xl p-6 shadow-md border border-teal-100">
+              <h3 className="text-lg font-semibold text-gray-800 mb-3">{island.hotel.name}</h3>
+              <div className="space-y-2 text-gray-600">
+                <p className="flex items-start gap-2">
+                  <span className="text-teal-600">📍</span>
+                  <span>{island.hotel.address}</span>
+                </p>
+                {island.hotel.phone && (
+                  <p className="flex items-center gap-2">
+                    <span className="text-teal-600">📞</span>
+                    <a href={`tel:${island.hotel.phone}`} className="hover:text-teal-600">
+                      {island.hotel.phone}
+                    </a>
+                  </p>
+                )}
+              </div>
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(island.hotel.name + ' ' + island.hotel.address)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors"
+              >
+                {t('hotel.directions')}
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+          </section>
+        )}
+
         {/* Category Filter */}
         <section className="mb-8">
           <div className="flex flex-wrap gap-2">

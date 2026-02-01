@@ -31,6 +31,12 @@ export function usePlaces() {
         heroImage: 'https://images.unsplash.com/photo-1507876466758-bc54f384809c?w=1200',
         center: { lat: 21.4389, lng: -158.0001 },
         placeCount: 6,
+        hotel: {
+          name: 'Hyatt Place Waikiki Beach',
+          address: '175 Paoakalani Avenue, Honolulu, HI, US, 96815',
+          phone: '+1 808 922 3861',
+          location: { lat: 21.2743, lng: -157.8227 },
+        },
       },
       {
         id: 'big-island',
@@ -39,6 +45,11 @@ export function usePlaces() {
         heroImage: 'https://images.unsplash.com/photo-1547483238-f400e65ccd56?w=1200',
         center: { lat: 19.5429, lng: -155.6659 },
         placeCount: 5,
+        hotel: {
+          name: 'Club Wyndham Mauna Loa Village',
+          address: '78-7190 Kaleiopapa St., Kailua-Kona, HI, 96740',
+          location: { lat: 19.6285, lng: -155.9919 },
+        },
       },
       {
         id: 'maui',
@@ -47,6 +58,11 @@ export function usePlaces() {
         heroImage: 'https://images.unsplash.com/photo-1542259009477-d625272157b7?w=1200',
         center: { lat: 20.7984, lng: -156.3319 },
         placeCount: 5,
+        hotel: {
+          name: 'Maui Schooner Resort',
+          address: '980 S Kihei Rd, Kihei, HI, 96753',
+          location: { lat: 20.7366, lng: -156.4560 },
+        },
       },
     ];
   }, [language]);

@@ -70,6 +70,12 @@ const en: Record<string, string> = {
   'lang.select': 'Language',
   'lang.zh': '中文',
   'lang.en': 'English',
+
+  // Hotel
+  'hotel.title': 'Our Hotel',
+  'hotel.address': 'Address',
+  'hotel.phone': 'Phone',
+  'hotel.directions': 'Get Directions',
 };
 
 export default en;

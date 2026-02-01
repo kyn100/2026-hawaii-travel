@@ -15,6 +15,13 @@ export interface Restaurant {
   mustTry?: string;
 }
 
+export interface Hotel {
+  name: string;
+  address: string;
+  phone?: string;
+  location: Location;
+}
+
 export interface Place {
   id: string;
   name: string;
@@ -38,6 +45,7 @@ export interface Island {
   heroImage: string;
   center: Location;
   placeCount: number;
+  hotel?: Hotel;
 }
 
 export interface UnsplashPhoto {
